@@ -1,4 +1,3 @@
-// ===== Fixed & Blended Script (no duplicate declarations) =====
 
 // 1) Defaults + single source of truth for quotes
 const defaultQuotes = [
@@ -34,6 +33,14 @@ function saveQuotes() {
   localStorage.setItem("quotes", JSON.stringify(quotes));
 }
 
+//   Save & restore selected category
+function saveSelectedCategory(cat) {
+  localStorage.setItem("selectedCategory", cat);
+}
+function getSelectedCategory() {
+  return localStorage.getItem("selectedCategory") || "All";
+}
+
 // ---- Session storage helpers (optional) ----
 function saveLastViewedQuote(quoteText) {
   sessionStorage.setItem("lastViewedQuote", quoteText);
@@ -62,9 +69,19 @@ function populateCategories() {
   });
 }
 
+//  Restore last selected category
+const savedCat = getSelectedCategory();
+if ([...categorySelect.options].some(opt => opt.value === savedCat)) {
+  categorySelect.value = savedCat;
+} else {
+  categorySelect.value = "All";
+}
+
 // Show Random Quote
 function showRandomQuote() {
   const selectedCategory = categorySelect.value;
+  // Save category filter choice
+  saveSelectedCategory(selectedCategory);
   const filteredQuotes = selectedCategory === "All"
     ? quotes
     : quotes.filter(q => q.category === selectedCategory);
