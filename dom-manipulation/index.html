@@ -1,52 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Quote Generator</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-      margin: 30px;
-    }
-    #quoteDisplay {
-      margin: 20px auto;
-      padding: 20px;
-      border: 2px solid #333;
-      width: 60%;
-      min-height: 80px;
-      border-radius: 8px;
-      font-size: 1.2rem;
-    }
-    select, input, button {
-      margin: 5px;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    .category {
-      font-size: 0.9rem;
-      color: rgb(50, 50, 230);
-    }
-  </style>
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Quote Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1> Dynamic Quote Generator </h1>
+  <div class="container">
+    <h1>Dynamic Quote Generator</h1>
 
-  <!-- Category Filter -->
-  <div>
-    <label for="categorySelect">Choose Category:</label>
-    <select id="categorySelect"></select>
+    <!-- Export & Import Buttons -->
+    <div class="controls-section">
+      <div class="storage-controls">
+        <button onclick="exportToJsonFile()">📤 Export Quotes</button>
+        <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+      </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="category-controls">
+      <label for="categorySelect">Choose Category:</label>
+      <select id="categorySelect"></select>
+    </div>
+
+    <!-- Quote Display -->
+    <div id="quoteDisplay">Click "Show New Quote" to begin!</div>
+    <div style="text-align: center;">
+      <button id="newQuote">🎲 Show New Quote</button>
+    </div>
+
+    <!-- Add New Quote -->
+    <h2>Add Your Own Quote</h2>
+    <div id="formContainer"></div>
   </div>
-
-  <!-- Quote Display -->
-  <div id="quoteDisplay">Click "Show New Quote" to begin!</div>
-  <button id="newQuote">Show New Quote</button>
-
-  <!-- Add New Quote -->
-  <h2>Add Your Own Quote</h2>
-  <div id="formContainer"></div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
+
