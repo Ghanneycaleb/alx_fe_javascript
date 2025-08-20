@@ -259,23 +259,18 @@ function showNotification(message, type = "success") {
   }
 }
 
-// Fetch quotes from server (simulated/mock API)
+// Fetch quotes from server (using JSONPlaceholder mock API)
 async function fetchQuotesFromServer() {
   try {
-    // Simulate server response with a static array for demo
-    // Replace with: const response = await fetch(SERVER_URL);
-    // const data = await response.json();
-    const data = [
-      {
-        text: "Server quote: Stay hungry, stay foolish.",
-        category: "Inspiration",
-      },
-      {
-        text: "Server quote: Simplicity is the soul of efficiency.",
-        category: "Programming",
-      },
-    ];
-    return Array.isArray(data) ? data : [];
+    // Use JSONPlaceholder mock API for demonstration
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await response.json();
+    // Map the mock API data to quote objects (using title as text, body as category for demo)
+    const quotesFromAPI = data.slice(0, 5).map((post) => ({
+      text: post.title,
+      category: post.body.substring(0, 20) || "General",
+    }));
+    return Array.isArray(quotesFromAPI) ? quotesFromAPI : [];
   } catch (err) {
     showSyncStatus("error", "Failed to fetch from server");
     showNotification("Failed to fetch from server", "error");
