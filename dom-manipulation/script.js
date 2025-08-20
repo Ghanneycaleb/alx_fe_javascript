@@ -336,8 +336,8 @@ async function syncQuotes() {
     );
     showConflictDialog(localOnly, serverOnly);
   } else {
-    showSyncStatus("synced", "Quotes synced with server.");
-    showNotification("Quotes synced with server.", "success");
+    showSyncStatus("synced", "Quotes synced with server!");
+    showNotification("Quotes synced with server!", "success");
     hideConflictDialog();
   }
 }
