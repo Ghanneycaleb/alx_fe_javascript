@@ -9,6 +9,48 @@
 </head>
 
 <body>
+
+ <!-- Sync Status Indicator -->
+  <div id="syncStatus" class="sync-status synced">
+    <span id="syncIcon"></span>
+    <span id="syncText">Synced</span>
+  </div>
+
+  <!-- Notification Area -->
+  <div id="notification" class="notification"></div>
+
+  <!-- Conflict Resolution Dialog -->
+  <div id="conflictDialog" class="conflict-dialog">
+    <div class="conflict-content">
+      <h3> Data Sync Conflicts Detected</h3>
+      <p>Some quotes have been modified both locally and on the server. Please choose how to resolve these conflicts:</p>
+      <div id="conflictList"></div>
+      <div class="conflict-buttons">
+        <button onclick="resolveConflicts('server')" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+          Keep Server Version
+        </button>
+        <button onclick="resolveConflicts('local')" style="background: linear-gradient(135deg, #059669, #047857);">
+          Keep Local Version  
+        </button>
+        <button onclick="resolveConflicts('merge')" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+          Merge Both
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Dynamic Quote Generator</h1>
+
+    <!-- Sync Controls -->
+    <div class="controls-section">
+      <div class="sync-controls">
+        <button onclick="manualSync()" id="syncBtn"> Sync Now</button>
+        <button onclick="toggleAutoSync()" id="autoSyncBtn"> Auto-Sync: ON</button>
+      </div>
+    </div>
+
+
   <div class="container">
     <h1>Dynamic Quote Generator</h1>
 
