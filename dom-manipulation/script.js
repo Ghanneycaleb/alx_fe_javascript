@@ -281,8 +281,14 @@ async function fetchQuotesFromServer() {
 // Post local quotes to server (simulated/mock API)
 async function postQuotesToServer(localQuotes) {
   try {
-    // Simulate POST request
-    // await fetch(SERVER_URL, { method: 'POST', body: JSON.stringify(localQuotes) });
+    // Simulate POST request to JSONPlaceholder with headers
+    await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(localQuotes),
+    });
     showSyncStatus("syncing", "Syncing quotes to server...");
     showNotification("Syncing quotes to server...", "warning");
     setTimeout(() => {
