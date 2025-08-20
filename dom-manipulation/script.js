@@ -259,8 +259,8 @@ function showNotification(message, type = "success") {
   }
 }
 
-// Fetch quotes from server (simulated)
-async function fetchServerQuotes() {
+// Fetch quotes from server (simulated/mock API)
+async function fetchQuotesFromServer() {
   try {
     // Simulate server response with a static array for demo
     // Replace with: const response = await fetch(SERVER_URL);
@@ -283,8 +283,8 @@ async function fetchServerQuotes() {
   }
 }
 
-// Post local quotes to server (simulated)
-async function postLocalQuotes(localQuotes) {
+// Post local quotes to server (simulated/mock API)
+async function postQuotesToServer(localQuotes) {
   try {
     // Simulate POST request
     // await fetch(SERVER_URL, { method: 'POST', body: JSON.stringify(localQuotes) });
@@ -300,10 +300,10 @@ async function postLocalQuotes(localQuotes) {
   }
 }
 
-// Conflict resolution: server wins by default, but notify user
-async function syncWithServer() {
+// Sync quotes with server and handle conflicts
+async function syncQuotes() {
   showSyncStatus("syncing", "Checking for updates...");
-  const serverQuotes = await fetchServerQuotes();
+  const serverQuotes = await fetchQuotesFromServer();
 
   // Detect conflicts: quotes present locally but not on server
   const localOnly = quotes.filter(
@@ -407,31 +407,12 @@ function resolveConflicts(option) {
 
 // Manual sync button event
 if (syncBtn) {
-  syncBtn.onclick = syncWithServer;
+  syncBtn.onclick = syncQuotes;
 }
 
-// Auto-sync toggle (for demo)
-let autoSyncEnabled = true;
-if (autoSyncBtn) {
-  autoSyncBtn.onclick = function () {
-    autoSyncEnabled = !autoSyncEnabled;
-    autoSyncBtn.textContent = `Auto-Sync: ${autoSyncEnabled ? "ON" : "OFF"}`;
-    showNotification(
-      `Auto-Sync turned ${autoSyncEnabled ? "ON" : "OFF"}`,
-      "success"
-    );
-  };
-}
-
-// Manual sync function for button
 function manualSync() {
-  syncWithServer();
+  syncQuotes();
 }
-
-// Periodic sync every 30 seconds if enabled
-setInterval(() => {
-  if (autoSyncEnabled) syncWithServer();
-}, 30000);
 
 // Expose resolveConflicts globally for dialog buttons
 window.resolveConflicts = resolveConflicts;
