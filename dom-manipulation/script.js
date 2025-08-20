@@ -416,3 +416,9 @@ function manualSync() {
 
 // Expose resolveConflicts globally for dialog buttons
 window.resolveConflicts = resolveConflicts;
+
+// Auto-sync logic (enabled by default)
+let autoSyncEnabled = true;
+setInterval(() => {
+  if (autoSyncEnabled) syncQuotes();
+}, 30000);
